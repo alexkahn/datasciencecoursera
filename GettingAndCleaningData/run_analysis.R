@@ -1,6 +1,8 @@
-# Make sure you are in a directory that contains all of the data files.
-
-
+#-------------------------------------------------------------------------------
+# run_analysis.R
+# Author: Alex Kahn
+# Description: please see the file README.md and Codebook.md for more info.
+#-------------------------------------------------------------------------------
 setwd("C:/Users/Owner/Documents/Coursera/UCI HAR Dataset/")
 
 
@@ -15,7 +17,7 @@ subject_train <- read.table("train/subject_train.txt")
 features <- read.table("features.txt", stringsAsFactors=FALSE)
 
 # This will give us all the names, but we only want means and SDs
-names(X_test)<- t(features$V2)
+names(X_test)<- features$V2
 
 # Let's use regex to find the ones we want
 # grep will search the text for matches and give us the indecies
@@ -35,9 +37,6 @@ X_test <- X_test[,c(keep_cols_index,stds)]
 names(X_test) <- features$V2[c(keep_cols_index, stds)]
 X_train <- X_train[,c(keep_cols_index,stds)]
 names(X_train) <- features$V2[c(keep_cols_index, stds)]
-# Activity labels
-labels<-list("1"="WALKING", "2"="WALKING_UPSTAIRS", "3"="WALKING_DOWNSTAIRS",
-             "4"="SITTING", "5"="STANDING", "6"="LAYING")
 
 # get our labels together - name some columns
 levels <- c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS",
@@ -66,4 +65,4 @@ full <- merge(test, train, all=TRUE)
 library(reshape2)
 fullMelt <- melt(full, id.vars = c("activity","subject_id"), measure.variables=3:75)
 tidy_data <- acast(fullMelt, subject_id ~ variable ~ activity, mean)
-save(tidy_data,file="tidy_UCI_HAR_dataset_averages_by_subject_and_activity.RData" )
+save(tidy_data,file="tidy_UCI_HAR_dataset_averages_by_subject_and_activity.txt")
