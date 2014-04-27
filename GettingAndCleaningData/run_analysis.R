@@ -27,8 +27,6 @@ x1 <- grep("meanFreq()", features$V2) # gives us just meanFreq() vars we don't
                                       # want to keep.
 x2 <- grep("mean()", features$V2) # just for testing/ debugging
 
-setdiff(x2,x1) # eliminates the meanFreq() vars
-
 keep_cols_index <- setdiff(means,x1)
 stds <- grep("[Ss]td", features$V2)
 

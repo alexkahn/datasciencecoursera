@@ -27,7 +27,7 @@ The data used in this cleaning were obtained from [UCI's Machine Learning Reposi
 **Note**: Make sure you are in a directory that contains all of the data files.
 First, let's read in our data files, since there are only six, we may not get any extra ground by automating this process; even though it would be easy to set-up.
 
-```{r}
+```
 X_test <-read.table("test/X_test.txt")
 y_test <-read.table("test/y_test.txt")
 subject_test <-read.table("test/subject_test.txt")
